@@ -1,0 +1,8 @@
+#img-bg{
+    background-image: url(https://i.imgur.com/k2PdvCz.jpg);
+
+    min-height: 695px;
+    background-image: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

@@ -1,0 +1,34 @@
+ul.social {
+    list-style: none;
+    padding   : 0;
+}
+
+ul.social li {
+    display: inline;
+    margin: 0;
+    padding: 5px;
+}
+
+.fa{
+    font-size: 30pt;
+    color: black;
+    padding: 10px; 
+}
+
+.fa-linkedin-square:hover{
+    color: deepskyblue;
+}
+
+.fa-github-square:hover{
+    color: white;
+}
+
+.fa-instagram:hover{
+    color: #C13584;
+}
+
+/* .fa-copyright{
+    color: white;
+    font-size: 15pt;
+
+} */
