@@ -12,6 +12,7 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { PaginaInicioComponent } from './pagina-inicio/pagina-inicio.component';
 import { InicioComponent } from './inicio/inicio.component';
+import { TemaComponent } from './tema/tema.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { InicioComponent } from './inicio/inicio.component';
     LoginComponent,
     SignupComponent,
     PaginaInicioComponent,
-    InicioComponent
+    InicioComponent,
+    TemaComponent
   ],
   imports: [
     BrowserModule,
