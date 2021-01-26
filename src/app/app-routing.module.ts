@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { TemaDeleteComponent } from './delete/tema-delete/tema-delete.component';
+import { TemaEditComponent } from './edit/tema-edit/tema-edit.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
@@ -14,7 +16,12 @@ const routes: Routes = [
 
   {path: "inicio", component: InicioComponent},
 
-  {path: "tema", component: TemaComponent}
+  {path: "tema", component: TemaComponent},
+
+  {path: "tema-edit/:id", component: TemaEditComponent},
+  {path: "tema-delete/:id", component: TemaDeleteComponent}
+
+
   
 
 ];
