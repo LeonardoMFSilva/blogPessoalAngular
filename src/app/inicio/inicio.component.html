@@ -37,7 +37,8 @@
                 postagens</a>
 
             <a class="nav-item nav-link text-secondary" id="nav-Postagens-tab" data-toggle="tab" href="#Postagens"
-                role="tab" aria-controls="nav-Postagens" aria-selected="false">Postagens</a>
+                role="tab" aria-controls="nav-Postagens" aria-selected="false" (click)="findByIdUser()">Minhas
+                Postagens</a>
 
             <a class="nav-item nav-link text-secondary" id="nav-porTema-tab" data-toggle="tab" href="#porTema"
                 role="tab" aria-controls="nav-porTema" aria-selected="false">Por tema</a>
@@ -45,11 +46,56 @@
     </nav>
     <div class="tab-content" id="nav-tabContent">
         <div class="tab-pane fade show active" id="todasPostagens" role="tabpanel"
-            aria-labelledby="nav-todasPostagens-tab">Todas as postagens</div>
+            aria-labelledby="nav-todasPostagens-tab">
 
-        <div class="tab-pane fade" id="Postagens" role="tabpanel" aria-labelledby="nav-Postagens-tab">Postagens</div>
 
-        <div class="tab-pane fade" id="porTema" role="tabpanel" aria-labelledby="nav-porTema-tab">Por tema</div>
+            <!--Postagens por todos os usuarios-->
+            <div class="card-columns mt-3">
+                <div class="card text-center" *ngFor="let item of listaPostagens">
+                    <div class="card-body">
+                        <h5 class="card-title">{{item.titulo}}</h5>
+                        <p class="card-text">{{item.texto}}</p>
+                        <small class="text-muted">Em: {{item.tema.descricao}}</small><br>
+                        <small class="text-muted">Postado em: {{item.date | date: "dd/MM/yyyy"}} às {{item.date | date:
+                            "HH:mm"}}</small> <br>
+                        <small class="text-muted">Por: {{item.usuario.nome}}</small>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!--/Postagens por todos os usuarios-->
+
+        <!--Postagens por usuario-->
+        <div class="tab-pane fade" id="Postagens" role="tabpanel" aria-labelledby="nav-Postagens-tab">
+            <div class="card-columns mt-3">
+                <div class="card text-center" *ngFor="let item of usuario.postagem">
+                    <div class="card-body">
+                        <h5 class="card-title">{{item.titulo}}</h5>
+                        <p class="card-text">{{item.texto}}</p>
+                        <small class="text-muted">Em: {{item.tema.descricao}}</small><br>
+                        <small class="text-muted">Postado em: {{item.date | date: "dd/MM/yyyy"}} às {{item.date | date:
+                            "HH:mm"}}</small> <br>
+                            <small class="text-muted">Por: {{item.usuario.nome}}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/Postagens por usuario-->
+
+        <div class="tab-pane fade" id="porTema" role="tabpanel" aria-labelledby="nav-porTema-tab">
+            <div class="card-columns mt-3" *ngFor="let tema of listaTemas">
+                <div class="card text-center" *ngFor="let item of tema.postagem">
+                    <div class="card-body">
+                        <h5 class="card-title">{{item.titulo}}</h5>
+                        <p class="card-text">{{item.texto}}</p> <br>
+                        <small class="text-muted">Postado em: {{item.date | date: "dd/MM/yyyy"}} às {{item.date | date:
+                            "HH:mm"}}</small> <br>
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -75,26 +121,29 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label for="titulo">Título</label>
-                    <input type="text" class="form-control" name="" id="titulo" placeholder="Digite o título:">
+                    <input [(ngModel)]="postagem.titulo" type="text" class="form-control" name="" id="titulo"
+                        placeholder="Digite o título:">
                 </div>
 
                 <div class="form-group">
                     <label for="titulo">Texto</label>
-                    <textarea name="texto" class="form-control" id="" rows="3"></textarea>
+                    <textarea [(ngModel)]="postagem.texto" name="texto" class="form-control" id="" rows="3"></textarea>
                 </div>
 
-                
+
                 <div class="form-group">
-                    <label for="titulo">Escolha um tema ou <a data-dismiss="modal" routerLink="/tema">cadastre um novo aqui!</a></label>
-                    <select name="tema" id="tema" class="form-control">
-                        <option value="">Temas</option>
+                    <label for="titulo">Escolha um tema ou <a data-dismiss="modal" routerLink="/tema">cadastre um novo
+                            aqui!</a></label>
+                    <select name="tema" id="tema" class="form-control" [(ngModel)]="idTema" (change)="findByIdTema()">
+                        <option *ngFor="let item of listaTemas" value="{{item.id}}">{{item.descricao}}</option>
                     </select>
                 </div>
 
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-success">Publicar</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal"
+                    (click)="publicar()">Publicar</button>
             </div>
         </div>
     </div>
