@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Usuario } from 'src/app/model/Usuario';
+import { AlertasService } from 'src/app/service/alertas.service';
 import { AuthService } from 'src/app/service/auth.service';
 import { environment } from 'src/environments/environment.prod';
 
@@ -20,7 +21,8 @@ export class UserEditComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private alertas: AlertasService
   ) { }
 
   ngOnInit() { 
@@ -46,12 +48,12 @@ export class UserEditComponent implements OnInit {
      this.usuario.tipo = this.tipoUser
 
      if(this.usuario.senha != this.confirmarSenha){
-       alert("Senhas incorretas")
+      this.alertas.showAlertDanger("Senhas incorretas")
      } else{
        this.authService.cadastrar(this.usuario).subscribe((resp: Usuario) => {
          this.usuario = resp
          this.router.navigate(["/inicio"])
-         alert("Atualização feita com sucesso! Faça login novamente para ver as atualizações.")
+         this.alertas.showAlertSuccess("Atualização feita com sucesso! Faça login novamente para ver as atualizações.")
          environment.token = ""
          environment.foto = ""
          environment.nome = ""
